@@ -65,6 +65,7 @@ export default {
 					{ title: "Subsystem Head", value: "Subsystem Head" },
 					{ title: "Team Manager", value: "Team Manager" },
 					{ title: "Team Leader", value: "Team Leader" },
+					{ title: "Senior Member", value: "Senior Member" },
 				],
 			},
 		},

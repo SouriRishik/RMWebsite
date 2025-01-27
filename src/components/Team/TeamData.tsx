@@ -29,8 +29,6 @@ export function TeamData(): React.ReactElement {
 		setDate(maxDate);
 	}, [maxDate]);
 
-	console.log(date, date?.getFullYear(), members);
-
 	return (
 		<div className="relative">
 			<div className="mt-16 flex min-h-screen w-full flex-col items-center justify-center">
@@ -39,7 +37,7 @@ export function TeamData(): React.ReactElement {
 				)}
 			</div>
 			{minDate && maxDate && (
-				<div className="fixed bottom-0 right-0 z-10 xs:bottom-8 xs:right-10">
+				<div className="fixed bottom-0 left-0 right-0 z-10 m-2 rounded-full shadow-md dark:shadow-none xs:bottom-10 xs:left-auto xs:right-11 xs:m-0 xs:w-fit">
 					<DatePicker date={date} setDate={setDate} minDate={minDate} maxDate={maxDate} />
 				</div>
 			)}

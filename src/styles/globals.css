@@ -85,4 +85,20 @@
 			}
 		}
 	}
+
+	.wave {
+		animation-name: wave;
+		animation-duration: 1s;
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+	}
+
+	@keyframes wave {
+		0% {
+			box-shadow: 0 0 0px 0px rgba(255, 255, 255, 0.5);
+		}
+		100% {
+			box-shadow: 0 0 0px 8px rgba(124, 113, 113, 0.275);
+		}
+	}
 }
