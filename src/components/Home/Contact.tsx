@@ -168,8 +168,12 @@ export function Contact(): React.JSX.Element {
 							</div>
 							<div className="flex flex-row items-center">
 								<PhoneIcon className="mr-2 h-4 w-4" />
-								<Link href="tel:+919630093604" target="_blank" rel="noopener noreferrer">
-									+91 963009360
+								<Link
+									// eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
+									href={`tel:+91${process.env.NEXT_PUBLIC_CONTACT_NUMBER as string}`}
+									target="_blank"
+									rel="noopener noreferrer">
+									+91 {process.env.NEXT_PUBLIC_CONTACT_NUMBER}
 								</Link>
 							</div>
 						</div>

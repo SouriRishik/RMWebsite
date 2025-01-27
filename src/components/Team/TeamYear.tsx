@@ -9,9 +9,17 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
-export function DatePicker({ minDate, maxDate }: { minDate: Date; maxDate: Date }): React.ReactElement {
-	const [date, setDate] = React.useState<Date | undefined>(maxDate);
-
+export function DatePicker({
+	date,
+	setDate,
+	minDate,
+	maxDate,
+}: {
+	date: Date | undefined;
+	setDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+	minDate: Date | undefined;
+	maxDate: Date | undefined;
+}): React.ReactElement {
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
