@@ -8,7 +8,7 @@ export default function Page(): React.ReactElement {
 	return (
 		<>
 			<Navbar />
-			<div className="min-h-screen w-full bg-black px-10 py-16 text-white">
+			<div className="min-h-screen w-full bg-white px-10 py-16 text-black dark:bg-black dark:text-white">
 				<div className="mx-auto max-w-7xl">
 					{/* RoboCup@Work Section */}
 					<div className="mt-10 grid items-center gap-10 md:grid-cols-[2fr_1fr]">
