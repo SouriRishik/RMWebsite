@@ -78,11 +78,8 @@ export function setup(theme: string): void {
 	}
 	_currentTheme = theme;
 	canvas = document.createElement("canvas");
-	// @ts-expect-error style is a readonly property
-	canvas.style = `
-		z-index: -1;
-		position: absolute;
-	`;
+	canvas.style.zIndex = "-1";
+	canvas.style.position = "absolute";
 	container.childNodes.length > 0 && container.removeChild(container.childNodes[0]);
 	container.appendChild(canvas);
 	renderer = new THREE.WebGLRenderer({
