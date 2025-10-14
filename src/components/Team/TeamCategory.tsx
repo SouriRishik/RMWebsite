@@ -55,10 +55,14 @@ const SubSystemSection = ({ subsystem, details }: { subsystem: string; details: 
 };
 
 const HeadDetails = ({ details }: { details: TeamMember[] }): React.JSX.Element => {
-	const managers = useMemo(() => details.filter((member) => 
-		member.role.toLowerCase().includes("team") || 
-		member.role.toLowerCase().includes("tech lead")
-	), [details]);
+	const managers = useMemo(
+		() =>
+			details.filter(
+				(member) =>
+					member.role.toLowerCase().includes("team") || member.role.toLowerCase().includes("tech lead")
+			),
+		[details]
+	);
 	const heads = useMemo(() => details.filter((member) => member.role.toLowerCase().includes("head")), [details]);
 
 	return (
