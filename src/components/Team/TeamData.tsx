@@ -37,7 +37,7 @@ export function TeamData(): React.ReactElement {
 				)}
 			</div>
 			{minDate && maxDate && (
-				<div className="fixed bottom-0 left-0 right-0 z-10 m-2 rounded-full shadow-md dark:shadow-none xs:bottom-10 xs:left-auto xs:right-11 xs:m-0 xs:w-fit">
+				<div className="fixed bottom-0 left-0 right-0 z-10 m-2 rounded-full shadow-md dark:shadow-none xs:bottom-10 xs:left-11 xs:right-auto xs:m-0 xs:w-fit">
 					<DatePicker date={date} setDate={setDate} minDate={minDate} maxDate={maxDate} />
 				</div>
 			)}
