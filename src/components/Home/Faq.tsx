@@ -69,7 +69,7 @@ export function FAQ(): React.JSX.Element {
 							2. 2nd runner up in Technoxian World Cup <br />
 							3. Qualified for all the nationals of ABU ROBOCON <br />
 							4. AIR 9 in ABU ROBOCON in 2016 <br />
-							5. World Robotics Olympiad we came AIR 2 2018
+							5. AIR 2 in the World Robotics Olympiad in 2018
 						</AccordionContent>
 					</AccordionItem>
 					<AccordionItem value="5" variant={"info"}>
