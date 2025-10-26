@@ -13,7 +13,7 @@ export function ScrollToTop(): React.ReactElement {
 		const SENTINEL_ID = "rm-scroll-top-sentinel";
 		let created = false;
 
-		let sentinel = document.getElementById(SENTINEL_ID) as HTMLElement | null;
+		let sentinel = document.getElementById(SENTINEL_ID);
 		if (!sentinel) {
 			sentinel = document.createElement("div");
 			sentinel.id = SENTINEL_ID;
@@ -43,8 +43,11 @@ export function ScrollToTop(): React.ReactElement {
 
 		return (): void => {
 			observer.disconnect();
-			if (created && sentinel && sentinel.parentElement) {
-				sentinel.parentElement.removeChild(sentinel);
+			if (created) {
+				const node = document.getElementById(SENTINEL_ID);
+				if (node?.parentElement) {
+					node.parentElement.removeChild(node);
+				}
 			}
 		};
 	}, []);
