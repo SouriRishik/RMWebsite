@@ -9,28 +9,48 @@ import { cn } from "@/lib/utils";
 export function ScrollToTop(): React.ReactElement {
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 
-	// Show button when page is scrolled down
 	useEffect(() => {
-		const toggleVisibility = (): void => {
-			if (window.scrollY > 300) {
-				setIsVisible(true);
-			} else {
-				setIsVisible(false);
-			}
-		};
+		const SENTINEL_ID = "rm-scroll-top-sentinel";
+		let created = false;
 
-		window.addEventListener("scroll", toggleVisibility);
+		let sentinel = document.getElementById(SENTINEL_ID) as HTMLElement | null;
+		if (!sentinel) {
+			sentinel = document.createElement("div");
+			sentinel.id = SENTINEL_ID;
+			sentinel.style.position = "absolute";
+			sentinel.style.top = "0px";
+			sentinel.style.left = "0px";
+			sentinel.style.width = "1px";
+			sentinel.style.height = "1px";
+			sentinel.style.pointerEvents = "none";
+			sentinel.style.zIndex = "-1";
+			document.body.prepend(sentinel);
+			created = true;
+		}
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				const e = entries[0];
+				setIsVisible(!e.isIntersecting);
+			},
+			{
+				root: null,
+				threshold: 0,
+			}
+		);
+
+		observer.observe(sentinel);
 
 		return (): void => {
-			window.removeEventListener("scroll", toggleVisibility);
+			observer.disconnect();
+			if (created && sentinel && sentinel.parentElement) {
+				sentinel.parentElement.removeChild(sentinel);
+			}
 		};
 	}, []);
 
 	const scrollToTop = (): void => {
-		window.scrollTo({
-			top: 0,
-			behavior: "smooth",
-		});
+		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 
 	return (
