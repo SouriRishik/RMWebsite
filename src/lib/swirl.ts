@@ -149,11 +149,8 @@ function createCanvas(): void {
 		a: document.createElement("canvas"),
 		b: document.createElement("canvas"),
 	};
-	// @ts-expect-error style is a readonly property
-	canvas.b.style = `
-		z-index: -1;
-		position: absolute;
-	`;
+	canvas.b.style.zIndex = "-1";
+	canvas.b.style.position = "absolute";
 	container.childNodes.length > 0 && container.removeChild(container.childNodes[0]);
 	container.appendChild(canvas.b);
 	ctx = {

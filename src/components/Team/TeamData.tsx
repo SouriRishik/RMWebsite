@@ -10,6 +10,7 @@ import { DatePicker } from "./TeamYear";
 
 export function TeamData(): React.ReactElement {
 	const members = useMembers();
+	const [date, setDate] = React.useState<Date | undefined>(undefined);
 	const [years, setYears] = React.useState<number[]>([]);
 	const [minDate, maxDate] = useMemo<[Date | undefined, Date | undefined]>(() => {
 		if (Object.keys(members).length === 0) return [undefined, undefined];
@@ -23,14 +24,21 @@ export function TeamData(): React.ReactElement {
 		setYears(Object.keys(members).map((year) => parseInt(year)));
 	}, [members]);
 
+	useEffect(() => {
+		if (!maxDate || date) return;
+		setDate(maxDate);
+	}, [maxDate]);
+
 	return (
 		<div className="relative">
 			<div className="mt-16 flex min-h-screen w-full flex-col items-center justify-center">
-				{years.length > 0 && <TeamCategory details={members[years[0]]} />}
+				{years.length > 0 && date && date.getFullYear().toString() in members && (
+					<TeamCategory details={members[date.getFullYear().toString()]} />
+				)}
 			</div>
 			{minDate && maxDate && (
-				<div className="fixed bottom-0 right-0 z-10 xs:bottom-8 xs:right-10">
-					<DatePicker minDate={minDate} maxDate={maxDate} />
+				<div className="fixed bottom-0 left-0 right-0 z-10 m-2 rounded-full shadow-md dark:shadow-none xs:bottom-10 xs:left-11 xs:right-auto xs:m-0 xs:w-fit">
+					<DatePicker date={date} setDate={setDate} minDate={minDate} maxDate={maxDate} />
 				</div>
 			)}
 		</div>

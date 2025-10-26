@@ -1,5 +1,6 @@
 import { Icon } from "lucide-react";
 import { Metadata } from "next";
+import { FaRobot } from "react-icons/fa";
 import { HiMiniWrenchScrewdriver } from "react-icons/hi2";
 import { IoIosPodium } from "react-icons/io";
 import { RiGalleryFill, RiTeamFill } from "react-icons/ri";
@@ -35,6 +36,12 @@ export const navLinks: NavLinkItem[] = [
 		label: "Gallery",
 		route: "/gallery",
 		icon: RiGalleryFill,
+		color: "text-primary",
+	},
+	{
+		label: "RoboCup",
+		route: "/robocup",
+		icon: FaRobot,
 		color: "text-primary",
 	},
 ];

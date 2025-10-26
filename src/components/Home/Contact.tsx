@@ -168,15 +168,19 @@ export function Contact(): React.JSX.Element {
 							</div>
 							<div className="flex flex-row items-center">
 								<PhoneIcon className="mr-2 h-4 w-4" />
-								<Link href="tel:+919630093604" target="_blank" rel="noopener noreferrer">
-									+91 963009360
+								<Link
+									// eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
+									href={`tel:+91${process.env.NEXT_PUBLIC_CONTACT_NUMBER as string}`}
+									target="_blank"
+									rel="noopener noreferrer">
+									+91 {process.env.NEXT_PUBLIC_CONTACT_NUMBER}
 								</Link>
 							</div>
 						</div>
 						<iframe
 							title="Team RoboManipal"
 							className="mt-3 h-full w-full rounded-md"
-							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3882.038475674665!2d74.78948297585087!3d13.347882787003211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbca58e304c36e7%3A0xd7655313d087ee45!2sTeam%20RoboManipal!5e0!3m2!1sen!2sin!4v1705827761207!5m2!1sen!2sin"
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d970.5209751543517!2d74.79414489999999!3d13.3450569!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbca58e304c36e7%3A0xd7655313d087ee45!2sTeam%20RoboManipal!5e0!3m2!1sen!2sin!4v1759239524707!5m2!1sen!2sin"
 							style={{ border: 0 }}
 							allowFullScreen
 							loading="lazy"

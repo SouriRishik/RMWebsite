@@ -10,7 +10,7 @@ import SectionWrapper from "../wrappers/SectionWrapper";
 
 export function About(): React.JSX.Element {
 	return (
-		<section className="w-full py-12 lg:py-24 xl:py-32">
+		<section className="w-full py-12 lg:py-24 xl:py-1">
 			<div className="container grid gap-12 px-4 md:px-6 lg:grid-cols-2 xl:gap-24">
 				<div className="space-y-8 lg:space-y-10">
 					<motion.div className="space-y-4" variants={fadeIn("right", "spring", 0.1, 1)}>

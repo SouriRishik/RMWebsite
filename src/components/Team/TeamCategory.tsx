@@ -11,7 +11,12 @@ import TeamCard from "./TeamCard";
 
 const SubSystemSection = ({ subsystem, details }: { subsystem: string; details: TeamMember[] }): React.JSX.Element => {
 	const members = useMemo(
-		() => details.filter((member) => member.subsystem === subsystem && member.role.toLowerCase() === "member"),
+		() =>
+			details.filter(
+				(member) =>
+					member.subsystem === subsystem &&
+					(member.role.toLowerCase() === "member" || member.role.toLowerCase() == "senior member")
+			),
 		[details, subsystem]
 	);
 	return (
@@ -50,7 +55,14 @@ const SubSystemSection = ({ subsystem, details }: { subsystem: string; details: 
 };
 
 const HeadDetails = ({ details }: { details: TeamMember[] }): React.JSX.Element => {
-	const managers = useMemo(() => details.filter((member) => member.role.toLowerCase().includes("team")), [details]);
+	const managers = useMemo(
+		() =>
+			details.filter(
+				(member) =>
+					member.role.toLowerCase().includes("team") || member.role.toLowerCase().includes("tech lead")
+			),
+		[details]
+	);
 	const heads = useMemo(() => details.filter((member) => member.role.toLowerCase().includes("head")), [details]);
 
 	return (
