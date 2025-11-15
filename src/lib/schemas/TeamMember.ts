@@ -1,3 +1,10 @@
+const currentYear = new Date().getFullYear();
+const startYear = 2010;
+const years = Array.from({ length: currentYear - startYear + 1 }).map((_, i) => {
+	const y = startYear + i;
+	return { title: String(y), value: String(y) };
+}).reverse();
+
 export default {
 	name: "teamMember",
 	title: "Team Member",
@@ -12,9 +19,9 @@ export default {
 		{
 			name: "year",
 			title: "Year",
-			type: "date",
+			type: "string",
 			options: {
-				calendarTodayLabel: "Today",
+				list: years,
 			},
 		},
 		{
