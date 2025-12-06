@@ -76,6 +76,7 @@ export default {
 					{ title: "Team Leader", value: "Team Leader" },
 					{ title: "Senior Member", value: "Senior Member" },
 					{ title: "Tech Lead", value: "Tech Lead" },
+					{ title: "Founder", value: "Founder" },
 				],
 			},
 		},
