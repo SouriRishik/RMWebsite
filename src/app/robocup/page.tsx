@@ -39,9 +39,9 @@ export default function Page(): React.ReactElement {
 						<div>
 							<Image
 								src="/karma2_edited.jpg"
-								layout="intrinsic"
 								width={700} // Adjust as needed
 								height={100} // Keep height fixed
+								sizes="(max-width: 768px) 100vw, 700px"
 								alt="KARMA Robot"
 								className="rounded-lg"
 							/>
