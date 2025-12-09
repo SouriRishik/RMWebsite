@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Info, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -22,6 +22,7 @@ import { navLinks } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 import ThemeToggleButton from "./ThemeToggle";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
 import { buttonVariants } from "./ui/button";
 
 export default function Navbar(): React.JSX.Element {
@@ -29,6 +30,7 @@ export default function Navbar(): React.JSX.Element {
 	const [logo, setLogo] = React.useState("/logo_light.png");
 	const { resolvedTheme } = useTheme();
 	const navBarRef = useRef<HTMLDivElement>(null);
+	const [sheetOpen, setSheetOpen] = React.useState(false);
 	React.useEffect(() => {
 		const handleScroll = (): void => {
 			if (navBarRef.current) {
@@ -152,27 +154,121 @@ export default function Navbar(): React.JSX.Element {
 					<ThemeToggleButton />
 				</div>
 				<div className="flex items-center gap-4 md:hidden">
-					<Sheet>
+					<Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
 						<SheetTrigger asChild>
 							<HiMenu className="cursor-pointer text-3xl" />
 						</SheetTrigger>
-						<SheetContent>
-							<SheetHeader className="mt-10">
+						<SheetContent className="w-full overflow-y-auto sm:max-w-none">
+							<SheetHeader className="mt-8">
 								<SheetTitle>Menu</SheetTitle>
 							</SheetHeader>
-							<div className="mt-10 flex flex-col gap-4">
-								{navLinks.map((link) => (
-									<Link
-										href={link.route}
-										key={link.label}
-										className={cn(
-											buttonVariants({ variant: "ghost" }),
-											"group relative flex h-12 cursor-pointer justify-start"
-										)}>
+							<div className="mt-6 flex flex-col gap-2">
+								<Accordion type="single" collapsible className="mt-0">
+									<AccordionItem value="about" variant="default" className="m-0 border-0 px-0 py-0">
+										<AccordionTrigger
+											className={cn(
+												buttonVariants({ variant: "ghost" }),
+												"group relative flex h-12 justify-start gap-0 px-3 [&>svg]:hidden"
+											)}>
+											<Info className="ml-1 h-5 w-5 text-primary" />
+											<span className="absolute left-12 flex items-center gap-1 text-base">
+												About Us <ChevronDown className="h-4 w-4" />
+											</span>
+										</AccordionTrigger>
+										<AccordionContent className="py-2">
+											<div className="mt-1 flex flex-col gap-2">
+												<Link
+													href="/#about"
+													className={cn(
+														buttonVariants({ variant: "ghost" }),
+														"h-10 justify-start"
+													)}
+													onClick={(): void => setSheetOpen(false)}>
+													<span className="text-base">About Us</span>
+												</Link>
+												<Link
+													href="/#sponsors"
+													className={cn(
+														buttonVariants({ variant: "ghost" }),
+														"h-10 justify-start"
+													)}
+													onClick={(): void => setSheetOpen(false)}>
+													<span className="text-base">Sponsors</span>
+												</Link>
+												<Link
+													href="/#contact"
+													className={cn(
+														buttonVariants({ variant: "ghost" }),
+														"h-10 justify-start"
+													)}
+													onClick={(): void => setSheetOpen(false)}>
+													<span className="text-base">Contact</span>
+												</Link>
+											</div>
+										</AccordionContent>
+									</AccordionItem>
+								</Accordion>
+
+							{navLinks.map((link): React.ReactNode => {
+								if (link.label === "Team") {
+									return (
+										<Accordion type="single" collapsible className="mt-0" key={link.label}>
+												<AccordionItem
+													value="team"
+													variant="default"
+													className="m-0 border-0 px-0 py-0">
+													<AccordionTrigger
+														className={cn(
+															buttonVariants({ variant: "ghost" }),
+															"group relative flex h-12 justify-start gap-0 px-3 [&>svg]:hidden"
+														)}>
+														<Users className="ml-1 h-5 w-5 text-primary" />
+														<span className="absolute left-12 flex items-center gap-1 text-base">
+															Team <ChevronDown className="h-4 w-4" />
+														</span>
+													</AccordionTrigger>
+													<AccordionContent className="border-0 py-2">
+														<div className="mt-1 flex flex-col gap-2">
+															<Link
+																href="/team/current"
+																className={cn(
+																	buttonVariants({ variant: "ghost" }),
+																	"h-10 justify-start"
+																)}
+															onClick={(): void => setSheetOpen(false)}>
+															<span className="text-base">Current Team</span>
+															</Link>
+															<Link
+																href="/team/alumni"
+																className={cn(
+																	buttonVariants({ variant: "ghost" }),
+																	"h-10 justify-start"
+																)}
+															onClick={(): void => setSheetOpen(false)}>
+															<span className="text-base">Alumni</span>
+															</Link>
+														</div>
+													</AccordionContent>
+												</AccordionItem>
+											</Accordion>
+										);
+									}
+									return (
+										<Link
+											href={link.route}
+											key={link.label}
+											className={cn(
+												buttonVariants({ variant: "ghost" }),
+												"group relative flex h-12 cursor-pointer justify-start"
+											)}
+										onClick={(): void => setSheetOpen(false)}>
 										<link.icon className={cn("h-5 w-5", link.color)} />
-										<span className="absolute left-12 text-base duration-200">{link.label}</span>
-									</Link>
-								))}
+											<span className="absolute left-12 text-base">{link.label}</span>
+										</Link>
+									);
+								})}
+
+								<div className="mt-2" />
 							</div>
 						</SheetContent>
 					</Sheet>
