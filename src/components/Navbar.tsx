@@ -209,10 +209,10 @@ export default function Navbar(): React.JSX.Element {
 									</AccordionItem>
 								</Accordion>
 
-							{navLinks.map((link): React.ReactNode => {
-								if (link.label === "Team") {
-									return (
-										<Accordion type="single" collapsible className="mt-0" key={link.label}>
+								{navLinks.map((link): React.ReactNode => {
+									if (link.label === "Team") {
+										return (
+											<Accordion type="single" collapsible className="mt-0" key={link.label}>
 												<AccordionItem
 													value="team"
 													variant="default"
@@ -235,8 +235,8 @@ export default function Navbar(): React.JSX.Element {
 																	buttonVariants({ variant: "ghost" }),
 																	"h-10 justify-start"
 																)}
-															onClick={(): void => setSheetOpen(false)}>
-															<span className="text-base">Current Team</span>
+																onClick={(): void => setSheetOpen(false)}>
+																<span className="text-base">Current Team</span>
 															</Link>
 															<Link
 																href="/team/alumni"
@@ -244,8 +244,8 @@ export default function Navbar(): React.JSX.Element {
 																	buttonVariants({ variant: "ghost" }),
 																	"h-10 justify-start"
 																)}
-															onClick={(): void => setSheetOpen(false)}>
-															<span className="text-base">Alumni</span>
+																onClick={(): void => setSheetOpen(false)}>
+																<span className="text-base">Alumni</span>
 															</Link>
 														</div>
 													</AccordionContent>
@@ -261,8 +261,8 @@ export default function Navbar(): React.JSX.Element {
 												buttonVariants({ variant: "ghost" }),
 												"group relative flex h-12 cursor-pointer justify-start"
 											)}
-										onClick={(): void => setSheetOpen(false)}>
-										<link.icon className={cn("h-5 w-5", link.color)} />
+											onClick={(): void => setSheetOpen(false)}>
+											<link.icon className={cn("h-5 w-5", link.color)} />
 											<span className="absolute left-12 text-base">{link.label}</span>
 										</Link>
 									);
