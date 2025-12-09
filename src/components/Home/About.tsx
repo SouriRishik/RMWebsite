@@ -28,13 +28,14 @@ export function About(): React.JSX.Element {
 							whileInView="show"
 							viewport={{ once: true }}
 							className="max-w-[700px] text-justify tracking-tight text-gray-600 dark:text-gray-400 md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed">
-							Team RoboManipal is the official Robotics team of MAHE, Manipal established in 2009. We are
+							Team RoboManipal is the official Robotics team of MAHE, Manipal established in 2010. We are
 							a multidisciplinary team of 40+ undergraduate robotics enthusiasts who endeavour to achieve
 							innovation through robotic technologies and spread knowledge about its diverse applications.
-							The legacy of 13 years to have won laurels at many levels is a testament to our enthusiasm.
-							We participate in prestigious competitions like ABU ROBOCON - Asia’s biggest Robotic
-							Competition. Robotreks and Robowars, the most exciting events of TechTatva which attract
-							teams from all over India, are organised by RoboManipal.
+							The legacy of 15 years to have won laurels at many levels is a testament to our enthusiasm.
+							We participate in prestigious competitions such as RoboCup—the world’s largest robotics
+							competition—Technoxian, and ABU ROBOCON—Asia’s biggest robotics competition. We also conduct
+							robotics research across diverse domains, developing innovative projects and publishing
+							papers.
 						</motion.p>
 					</motion.div>
 				</div>

@@ -65,11 +65,15 @@ export function FAQ(): React.JSX.Element {
 							What are the recent achievements of the team ?
 						</AccordionTrigger>
 						<AccordionContent>
-							1. We received All India rank 21 in ABU ROBOCON <br />
-							2. 2nd runner up in Technoxian World Cup <br />
-							3. Qualified for all the nationals of ABU ROBOCON <br />
-							4. AIR 9 in ABU ROBOCON in 2016 <br />
-							5. AIR 2 in the World Robotics Olympiad in 2018
+							1. AIR 1 in Ather Byte Battles 2.0 in 2025 <br />
+							2. Second Runner-Up at Robonautica, IISc Rhapsody 3.0 in 2025 <br />
+							3. Runners up in Tech Solstice 2025 at MIT-Bengaluru <br />
+							4. 1st place at Tech-TED Project Presentation in 2025 <br />
+							5. Second runners up in Technoxian World Cup 2024 <br />
+							6. Group Leaders in ABU ROBOCON Nationals 2024 <br />
+							7. Received All India rank 21 in ABU ROBOCON'23 <br />
+							8. AIR 2 in the World Robotics Olympiad in 2018 <br />
+							9. AIR 9 in ABU ROBOCON in 2016
 						</AccordionContent>
 					</AccordionItem>
 					<AccordionItem value="5" variant={"info"}>
@@ -77,17 +81,24 @@ export function FAQ(): React.JSX.Element {
 							What are the research projects that team is curently working on?
 						</AccordionTrigger>
 						<AccordionContent>
-							1. ARNAV: A biomimetic hand project. <br />
-							2. Crab bot: A semi-autonomous robot designed for social purposes, utilizing swarm robotics
-							mechanisms. <br />
-							3. PRAYAS: A 6-DOF serial manipulator project. <br />
-							4. PEEKER: A surveillance robot equipped with a 3-DOF camera. <br />
-							5. Swerve drive: An omnidirectional drive-train in which all wheels are independently
-							steered and driven. <br />
-							6. RMMD (RoboManipal Motor Driver): An in-house-built motor driver used to efficiently
-							control motor speed and direction, featuring built-in reverse current protection. <br />
-							7. Tachometer: A fully in-house-built tachometer, including a microcontrolling unit, printed
-							circuit board, and LED screen. <br />
+							1. KARMA: A 6-DOF robotic arm mounted on a mobile base, capable of autonomous navigation and
+							performing tasks such as object detection, picking, and placing. Built for real-world task
+							execution using advanced motion planning and intelligent control. <br />
+							2. Angulator: A compact, real-time orientation tracking device that provides precise yaw,
+							pitch, and roll data using an nRF module with ESB wireless communication. Designed for
+							multi-robot motion analysis with ultra-low latency and easy mounting. <br />
+							3. Swerve Drive: An omnidirectional drive-train in which all wheels are independently
+							steered and driven, enabling highly agile and precise movement for competition robots.{" "}
+							<br />
+							4. RMMD V2 (RoboManipal Motor Driver): Developed the second iteration of an in-house motor
+							driver, fully integrated as a standalone ROS node for direct robot communication. Optimized
+							the power stage to significantly reduce power consumption compared to the validated V1
+							prototype, while retaining reverse-current protection. <br />
+							5. Tachometer: A fully in-house-built tachometer featuring a microcontroller unit, custom
+							PCB, and LED display for accurate RPM measurement and system monitoring. <br />
+							6. FarmBot: It is an autonomous field robot that combines computer vision, soil sensing, and
+							AI-based disease detection to give Indian farmers real-time, actionable insights for
+							reducing crop loss and promoting sustainable farming. <br />
 						</AccordionContent>
 					</AccordionItem>
 				</Accordion>
