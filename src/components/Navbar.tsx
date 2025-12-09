@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -65,15 +66,22 @@ export default function Navbar(): React.JSX.Element {
 					<NavigationMenu>
 						<NavigationMenuList>
 							<NavigationMenuItem>
-								<NavigationMenuTrigger>About Us</NavigationMenuTrigger>
+								<NavigationMenuTrigger className="text-md">About Us</NavigationMenuTrigger>
 								<NavigationMenuContent>
 									<ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
 										<li className="row-span-3">
 											<NavigationMenuLink asChild>
 												<a
-													className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-4 no-underline outline-none focus:shadow-md"
+													className="flex h-full w-full select-none flex-col items-center justify-center rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 text-center no-underline outline-none focus:shadow-md"
 													href="/">
-													<div className="mb-2 mt-4 text-lg font-medium">RoboManipal</div>
+													<Image
+														src="/icons/icon-384x384.png"
+														alt="RoboManipal Logo"
+														width={96}
+														height={96}
+														className="mb-4 h-24 w-24 rounded-full shadow-sm"
+													/>
+													<div className="mb-2 text-lg font-medium">RoboManipal</div>
 													<p className="text-pretty text-xs text-muted-foreground">
 														A student project dedicated to the robotics and automation.
 													</p>
@@ -92,15 +100,53 @@ export default function Navbar(): React.JSX.Element {
 									</ul>
 								</NavigationMenuContent>
 							</NavigationMenuItem>
-							{navLinks.map((link) => (
-								<NavigationMenuItem key={link.label}>
-									<NavigationMenuLink
-										href={link.route}
-										className={cn(navigationMenuTriggerStyle(), "text-md cursor-pointer")}>
-										{link.label}
-									</NavigationMenuLink>
-								</NavigationMenuItem>
-							))}
+							{navLinks.map((link) => {
+								if (link.label === "Team") {
+									return (
+										<div key={link.label} className="relative">
+											<button
+												className={cn(
+													navigationMenuTriggerStyle(),
+													"text-md peer flex items-center"
+												)}>
+												Team
+												<ChevronDown className="relative top-[1px] ml-1 h-3 w-3 transition duration-200 peer-hover:rotate-180" />
+											</button>
+											<div className="invisible absolute right-0 top-full z-50 mt-1 w-[280px] rounded-md border bg-popover p-4 text-popover-foreground opacity-0 shadow-lg transition-all duration-200 peer-hover:visible peer-hover:opacity-100 hover:visible hover:opacity-100">
+												<div className="grid gap-3">
+													<a
+														href="/team/current"
+														className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+														<div className="text-sm font-medium leading-none">
+															Current Team
+														</div>
+														<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+															Meet our current team members.
+														</p>
+													</a>
+													<a
+														href="/team/alumni"
+														className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+														<div className="text-sm font-medium leading-none">Alumni</div>
+														<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+															Meet our alumni from previous batches.
+														</p>
+													</a>
+												</div>
+											</div>
+										</div>
+									);
+								}
+								return (
+									<NavigationMenuItem key={link.label}>
+										<NavigationMenuLink
+											href={link.route}
+											className={cn(navigationMenuTriggerStyle(), "text-md cursor-pointer")}>
+											{link.label}
+										</NavigationMenuLink>
+									</NavigationMenuItem>
+								);
+							})}
 						</NavigationMenuList>
 					</NavigationMenu>
 					<ThemeToggleButton />
