@@ -12,13 +12,18 @@ import TeamCard from "./TeamCard";
 const SubSystemSection = ({ subsystem, details }: { subsystem: string; details: TeamMember[] }): React.JSX.Element => {
 	const members = useMemo(
 		() =>
-			details.filter(
-				(member) =>
+			details.filter((member) => {
+				const role = (member.role || "").toLowerCase();
+				return (
+					Boolean(member.subsystem) &&
 					member.subsystem === subsystem &&
-					(member.role.toLowerCase() === "member" || member.role.toLowerCase() == "senior member")
-			),
+					(role === "member" || role === "senior member")
+				);
+			}),
 		[details, subsystem]
 	);
+	const subKey = (subsystem || "").toLowerCase();
+	const subText = subsystemText[subKey];
 	return (
 		<>
 			{members.length === 0 ? null : (
@@ -32,16 +37,16 @@ const SubSystemSection = ({ subsystem, details }: { subsystem: string; details: 
 						<h2 className="text-[30px] font-black uppercase text-foreground/90 xs:text-[40px] sm:text-[50px] md:text-[60px]">
 							{subsystem}
 						</h2>
-						<span className="tracking-pretty hidden text-center font-bold text-foreground/80 sm:flex sm:text-[18px]">
-							"{subsystemText[subsystem.toLowerCase()].split("\n")[0]}"
-						</span>
-						<p className="tracking-pretty mt-2 hidden text-balance text-center text-foreground/60 sm:flex sm:text-[18px]">
-							{
-								subsystemText[subsystem.toLowerCase()].split("\n")[
-									subsystemText[subsystem.toLowerCase()].split("\n").length - 1
-								]
-							}
-						</p>
+						{subText && (
+							<>
+								<span className="tracking-pretty hidden text-center font-bold text-foreground/80 sm:flex sm:text-[18px]">
+									"{subText.split("\n")[0]}"
+								</span>
+								<p className="tracking-pretty mt-2 hidden text-balance text-center text-foreground/60 sm:flex sm:text-[18px]">
+									{subText.split("\n")[subText.split("\n").length - 1]}
+								</p>
+							</>
+						)}
 					</motion.div>
 					<div className="my-16 flex flex-wrap items-center justify-center gap-16">
 						{members.map((member) => (
@@ -57,13 +62,24 @@ const SubSystemSection = ({ subsystem, details }: { subsystem: string; details: 
 const HeadDetails = ({ details }: { details: TeamMember[] }): React.JSX.Element => {
 	const managers = useMemo(
 		() =>
-			details.filter(
-				(member) =>
-					member.role.toLowerCase().includes("team") || member.role.toLowerCase().includes("tech lead")
-			),
+			details.filter((member) => {
+				const role = (member.role || "").toLowerCase();
+				return role.includes("team") || role.includes("tech lead");
+			}),
 		[details]
 	);
-	const heads = useMemo(() => details.filter((member) => member.role.toLowerCase().includes("head")), [details]);
+	const heads = useMemo(
+		() =>
+			details.filter((member) => {
+				const role = (member.role || "").toLowerCase();
+				return role.includes("head") || role === "founder";
+			}),
+		[details]
+	);
+
+	if (managers.length === 0 && heads.length === 0) {
+		return <></>;
+	}
 
 	return (
 		<>
@@ -105,7 +121,7 @@ export default function TeamCategory({ details }: { details: TeamMember[] }): Re
 	const subsystems = useMemo(() => {
 		const subsystems = new Set<string>();
 		details.forEach((member) => {
-			subsystems.add(member.subsystem);
+			if (member.subsystem) subsystems.add(member.subsystem);
 		});
 		return Array.from(subsystems);
 	}, [details]);
