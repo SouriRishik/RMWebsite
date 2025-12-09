@@ -10,26 +10,23 @@ import { textVariant } from "@/lib/motion";
 import TeamCard from "./TeamCard";
 
 const SubSystemSection = ({ subsystem, details }: { subsystem: string; details: TeamMember[] }): React.JSX.Element => {
-	const members = useMemo(
-		() => {
-			const filtered = details.filter((member) => {
-				const role = (member.role || "").toLowerCase();
-				return (
-					Boolean(member.subsystem) &&
-					member.subsystem === subsystem &&
-					(role === "member" || role === "senior member")
-				);
-			});
-			return filtered.sort((a, b) => {
-				const roleA = (a.role || "").toLowerCase();
-				const roleB = (b.role || "").toLowerCase();
-				if (roleA === "senior member" && roleB !== "senior member") return -1;
-				if (roleA !== "senior member" && roleB === "senior member") return 1;
-				return 0;
-			});
-		},
-		[details, subsystem]
-	);
+	const members = useMemo(() => {
+		const filtered = details.filter((member) => {
+			const role = (member.role || "").toLowerCase();
+			return (
+				Boolean(member.subsystem) &&
+				member.subsystem === subsystem &&
+				(role === "member" || role === "senior member")
+			);
+		});
+		return filtered.sort((a, b) => {
+			const roleA = (a.role || "").toLowerCase();
+			const roleB = (b.role || "").toLowerCase();
+			if (roleA === "senior member" && roleB !== "senior member") return -1;
+			if (roleA !== "senior member" && roleB === "senior member") return 1;
+			return 0;
+		});
+	}, [details, subsystem]);
 	const subKey = (subsystem || "").toLowerCase();
 	const subText = subsystemText[subKey];
 	return (
