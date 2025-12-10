@@ -26,8 +26,7 @@ export function AlumniDatePicker({
 	const selectedYear = date?.getFullYear();
 
 	function handleSelect(year: number): void {
-		const base = date ?? new Date();
-		const newDate = new Date(base);
+		const newDate = new Date(date ?? new Date());
 		newDate.setFullYear(year);
 		setDate(newDate);
 	}
@@ -38,9 +37,8 @@ export function AlumniDatePicker({
 				<Button
 					variant={"outline"}
 					className={cn(
-						"flex h-12 w-full items-center justify-center rounded-full p-0 font-normal xs:w-12 xs:border",
-						!date && "text-muted-foreground",
-						resolvedTheme === "light" ? "xs:wave" : ""
+						"xs:wave flex h-12 w-full items-center justify-center rounded-full p-0 font-normal xs:w-12 xs:border",
+						!date && "text-muted-foreground"
 					)}>
 					<ShineBorder
 						borderRadius={9999}
