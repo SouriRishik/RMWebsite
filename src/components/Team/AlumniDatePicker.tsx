@@ -37,7 +37,7 @@ export function AlumniDatePicker({
 				<Button
 					variant={"outline"}
 					className={cn(
-						"xs:wave flex h-12 w-full items-center justify-center rounded-full p-0 font-normal xs:w-12 xs:border",
+						"xs:wave flex h-12 w-full items-center justify-center rounded-full p-0 font-normal xs:w-12 ring-0 !border-0 !outline-none !shadow-none",
 						!date && "text-muted-foreground"
 					)}>
 					<ShineBorder
