@@ -47,14 +47,11 @@ export function WorkData(): React.ReactElement {
 						</p>
 					</motion.div>
 					<div
-						className="pl-27 sm:pl-31 my-16 ml-[66px] grid w-full max-w-7xl snap-x snap-mandatory 
-							auto-cols-[20rem] grid-flow-col items-start gap-20 overflow-x-auto overflow-y-hidden pr-8 scrollbar-hide sm:ml-[82px] sm:auto-cols-[25rem] 
-							sm:pr-12 lg:ml-[118px] lg:auto-cols-[22rem] lg:pl-40 lg:pr-16"
-						style={{ scrollPaddingRight: "6rem" }}>
+						className="my-16 flex flex-wrap items-center justify-center gap-16"
+						style={{ maxWidth: "calc(3 * 20rem + 2 * 4rem)" }}>
 						{status[key].map((work) => (
 							<motion.div
 								key={work.title}
-								className="mr-8 inline-block snap-start"
 								variants={fadeIn("up", "spring", 0.2, 0.65)}
 								initial="hidden"
 								whileInView="show"
@@ -62,8 +59,6 @@ export function WorkData(): React.ReactElement {
 								<WorkCard work={work} />
 							</motion.div>
 						))}
-						{/* spacer to ensure last card fully visible on all viewports */}
-						<div className="w-8 shrink-0" />
 					</div>
 				</div>
 			))}
