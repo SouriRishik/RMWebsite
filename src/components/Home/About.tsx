@@ -32,10 +32,10 @@ export function About(): React.JSX.Element {
 							a multidisciplinary team of 40+ undergraduate robotics enthusiasts who endeavour to achieve
 							innovation through robotic technologies and spread knowledge about its diverse applications.
 							The legacy of 15 years to have won laurels at many levels is a testament to our enthusiasm.
-							We participate in prestigious competitions such as RoboCup—the world’s largest robotics
-							competition—Technoxian, and ABU ROBOCON—Asia’s biggest robotics competition. We also conduct
-							robotics research across diverse domains, developing innovative projects and publishing
-							papers.
+							We participate in prestigious competitions such as RoboCup - the world's largest robotics
+							competition - Technoxian, and ABU ROBOCON - Asia's biggest robotics competition. We also
+							conduct robotics research across diverse domains, developing innovative projects and
+							publishing papers.
 						</motion.p>
 					</motion.div>
 				</div>
