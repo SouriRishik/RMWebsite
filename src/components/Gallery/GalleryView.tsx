@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
+import { Lightbox } from "@/components/ui/lightbox";
 import useGallery from "@/lib/hooks/useGallery";
 import { fadeIn, textVariant } from "@/lib/motion";
 
@@ -12,6 +13,22 @@ import GalleryImage from "./GalleryImage";
 
 export function GalleryView(): React.JSX.Element {
 	const gallery = useGallery();
+	const [lightboxOpen, setLightboxOpen] = useState(false);
+	const [currentIndex, setCurrentIndex] = useState(0);
+
+	const handleImageClick = (index: number): void => {
+		setCurrentIndex(index);
+		setLightboxOpen(true);
+	};
+
+	const handleNext = (): void => {
+		setCurrentIndex((prev) => (prev + 1 < gallery.length ? prev + 1 : prev));
+	};
+
+	const handlePrev = (): void => {
+		setCurrentIndex((prev) => (prev - 1 >= 0 ? prev - 1 : prev));
+	};
+
 	return (
 		<div className="mx-auto mt-32 flex min-h-screen w-full max-w-7xl flex-col items-center justify-center px-4 py-10 sm:px-16">
 			<motion.div
@@ -37,12 +54,32 @@ export function GalleryView(): React.JSX.Element {
 						columnsCountBreakPoints={{ 350: 1, 480: 2, 720: 3 }}>
 						<Masonry gutter="1.5rem">
 							{gallery.map((item, idx) => (
-								<GalleryImage key={idx} item={item} />
+								<div
+									key={idx}
+									onClick={(): void => handleImageClick(idx)}
+									role="button"
+									tabIndex={0}
+									onKeyDown={(e): void => {
+										if (e.key === "Enter") {
+											handleImageClick(idx);
+										}
+									}}>
+									<GalleryImage item={item} />
+								</div>
 							))}
 						</Masonry>
 					</ResponsiveMasonry>
 				)}
 			</motion.div>
+
+			<Lightbox
+				isOpen={lightboxOpen}
+				items={gallery}
+				currentIndex={currentIndex}
+				onClose={(): void => setLightboxOpen(false)}
+				onNext={handleNext}
+				onPrev={handlePrev}
+			/>
 		</div>
 	);
 }
