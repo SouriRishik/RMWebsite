@@ -17,6 +17,7 @@ export default defineConfig({
 	// Add and edit the content schema in the './sanity/schema' folder
 	schema,
 	plugins: [
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		structureTool({
 			structure: (S: StructureBuilder) => S.defaults(),
 		}),
