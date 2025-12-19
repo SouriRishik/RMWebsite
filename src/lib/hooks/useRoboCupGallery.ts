@@ -13,9 +13,7 @@ export default function useRoboCupGallery(): RoboCupGalleryItem[] {
 	useEffect(() => {
 		async function fetchGalleryItems(): Promise<void> {
 			const query = `*[_type == "roboCupGalleryItem"] | order(order asc)`;
-			const results = await client.fetch<
-				Array<Omit<RoboCupGalleryItem, "image"> & { image: Image }>
-			>(query);
+			const results = await client.fetch<(Omit<RoboCupGalleryItem, "image"> & { image: Image })[]>(query);
 			const processedItems = results.map((result) => ({
 				...result,
 				image: urlForImage(result.image),
