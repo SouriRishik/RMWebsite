@@ -19,6 +19,12 @@ export default {
 			},
 		},
 		{
+			name: "caption",
+			title: "Caption",
+			type: "string",
+			description: "Caption to display below the video",
+		},
+		{
 			name: "order",
 			title: "Order",
 			type: "number",

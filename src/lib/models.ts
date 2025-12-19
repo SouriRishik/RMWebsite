@@ -62,11 +62,8 @@ export interface Work {
 export interface RoboCupVideo {
 	readonly _id: string;
 	readonly title: string;
-	readonly video: {
-		asset: {
-			url: string;
-		};
-	};
+	readonly caption: string;
+	readonly video: string;
 	readonly order: number;
 	readonly _createdAt: Date;
 	readonly _updatedAt: Date;
@@ -75,11 +72,7 @@ export interface RoboCupVideo {
 export interface RoboCupGalleryItem {
 	readonly _id: string;
 	readonly title: string;
-	image: {
-		asset: {
-			url: string;
-		};
-	};
+	image: string;
 	readonly caption: string;
 	readonly order: number;
 	readonly _createdAt: Date;

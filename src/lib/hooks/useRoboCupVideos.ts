@@ -10,7 +10,16 @@ export default function useRoboCupVideos(): RoboCupVideo[] {
 
 	useEffect(() => {
 		async function fetchVideos(): Promise<void> {
-			const query = `*[_type == "roboCupVideo"] | order(order asc)`;
+			const query = `*[_type == "roboCupVideo"] | order(order asc) {
+				_id,
+				_type,
+				title,
+				caption,
+				order,
+				_createdAt,
+				_updatedAt,
+				"video": video.asset->url
+			}`;
 			const results = await client.fetch<RoboCupVideo[]>(query);
 			setVideos(results);
 		}
