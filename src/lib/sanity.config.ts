@@ -4,7 +4,7 @@
 
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
-import { structureTool, type StructureBuilder } from "sanity/structure";
+import { type StructureBuilder, structureTool } from "sanity/structure";
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from "./sanity/env";
