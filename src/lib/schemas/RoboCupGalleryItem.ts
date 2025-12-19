@@ -28,7 +28,9 @@ export default {
 			name: "order",
 			title: "Order",
 			type: "number",
-			description: "Order in which images appear",
+			description: "Order in which images appear (natural numbers only: 1, 2, 3...)",
+			// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+			validation: (Rule: any) => Rule.required().min(1).integer(),
 		},
 		{
 			name: "createdAt",
