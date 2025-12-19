@@ -37,14 +37,12 @@ export function Lightbox({
 			role="dialog"
 			aria-modal="true"
 			aria-label="Image lightbox">
-			<Button
+			<button
 				onClick={onClose}
-				variant="ghost"
-				size="icon"
-				className="absolute right-4 top-4 text-white hover:bg-white/20"
+				className="absolute right-4 top-4 z-50 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-white/20"
 				aria-label="Close lightbox">
 				<X className="h-6 w-6" />
-			</Button>
+			</button>
 			<div
 				className="relative flex h-full max-h-[90vh] w-full max-w-[90vw] items-center justify-center"
 				onClick={(e): void => e.stopPropagation()}>
