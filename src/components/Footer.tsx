@@ -27,6 +27,13 @@ export default function Footer(): React.JSX.Element {
 							<li>
 								<Link
 									className="transition-all duration-300 ease-in-out hover:text-primary"
+									href="/robocup">
+									RoboCup
+								</Link>
+							</li>
+							<li>
+								<Link
+									className="transition-all duration-300 ease-in-out hover:text-primary"
 									href="/#contact">
 									Contact
 								</Link>
@@ -67,8 +74,15 @@ export default function Footer(): React.JSX.Element {
 							<li>
 								<Link
 									className="transition-all duration-300 ease-in-out hover:text-primary"
-									href="/team">
-									Team
+									href="/team/current">
+									Current Team
+								</Link>
+							</li>
+							<li>
+								<Link
+									className="transition-all duration-300 ease-in-out hover:text-primary"
+									href="/team/alumni">
+									Alumni
 								</Link>
 							</li>
 						</ul>
