@@ -15,7 +15,8 @@ export default function useMembers(): Record<string, TeamMember[]> {
 			const results = await previewClient.fetch<TeamMember[]>(query);
 			results.forEach((result) => {
 				result.image = urlForImage(result.image as Image);
-				result.year = new Date(result.year);
+				const yearNum = parseInt(String(result.year), 10);
+				result.year = new Date(yearNum, 0, 1);
 			});
 			const years = results.map((result) => result.year.getFullYear());
 			const uniqueYears = [...new Set(years)];
