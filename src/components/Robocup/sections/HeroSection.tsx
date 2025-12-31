@@ -2,9 +2,9 @@
 
 import { motion } from "framer-motion";
 // import Link from "next/link";
-import { ChevronLeft, ChevronRight, FileText, Play, X } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, FileText, Play, X } from "lucide-react";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import useRoboCupVideos from "@/lib/hooks/useRoboCupVideos";
 import { RoboCupVideo } from "@/lib/models";
@@ -13,9 +13,11 @@ import { cn } from "@/lib/utils";
 
 export default function HeroSection(): React.ReactElement {
 	const [isVideoOpen, setIsVideoOpen] = useState(false);
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 	const roboCupVideos = useRoboCupVideos();
 	const [videos, setVideos] = useState<RoboCupVideo[]>([]);
+	const dropdownRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		setVideos(roboCupVideos);
@@ -24,6 +26,22 @@ export default function HeroSection(): React.ReactElement {
 	useEffect(() => {
 		// Dependencies tracked for cleanup
 	}, [videos, currentVideoIndex]);
+
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent): void => {
+			if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+				setIsDropdownOpen(false);
+			}
+		};
+
+		if (isDropdownOpen) {
+			document.addEventListener("mousedown", handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [isDropdownOpen]);
 
 	const handleNextVideo = (): void => {
 		setCurrentVideoIndex((prev) => (prev + 1 < videos.length ? prev + 1 : prev));
@@ -60,19 +78,45 @@ export default function HeroSection(): React.ReactElement {
 							innovation in robotics technology, encouraging solutions for complex real-world tasks such
 							as precise object recognition, manipulation, and autonomous navigation in dynamic settings.
 						</p>
-						<div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:gap-4">
-							<motion.a
-								variants={fadeIn("up", "spring", 0.2, 0.65)}
-								initial="hidden"
-								whileInView="show"
-								viewport={{ once: true }}
-								href="/RoboCup-TDP.pdf"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3 font-semibold text-primary-foreground transition-all hover:scale-105 hover:shadow-lg">
-								<FileText className="h-5 w-5" />
-								Team Description Paper
-							</motion.a>
+						<div
+							className={`mt-8 flex w-full flex-col gap-3 transition-all duration-300 sm:flex-row sm:gap-4 ${
+								isDropdownOpen ? "[&>:first-child]:mb-24 sm:[&>:first-child]:mb-0" : ""
+							}`}>
+							<div ref={dropdownRef} className="relative">
+								<motion.button
+									variants={fadeIn("up", "spring", 0.2, 0.65)}
+									initial="hidden"
+									whileInView="show"
+									viewport={{ once: true }}
+									onClick={(): void => setIsDropdownOpen(!isDropdownOpen)}
+									className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all hover:scale-105 hover:shadow-lg sm:w-auto sm:px-8">
+									<FileText className="h-5 w-5" />
+									Team Description Paper
+									<ChevronDown
+										className={`h-4 w-4 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
+									/>
+								</motion.button>
+								{isDropdownOpen && (
+									<div className="absolute left-0 right-0 top-full z-10 mt-2 w-[calc(100vw-64px)] rounded-lg border border-primary/50 bg-background sm:left-0 sm:right-auto sm:w-[302px]">
+										<button
+											onClick={(): void => {
+												window.open("/RoboCup-TDP-2025.pdf", "_blank");
+												setIsDropdownOpen(false);
+											}}
+											className="w-full px-4 py-2 text-center font-semibold text-black hover:bg-primary/10 dark:text-white">
+											2025
+										</button>
+										<button
+											onClick={(): void => {
+												window.open("/RoboCup-TDP-2026.pdf", "_blank");
+												setIsDropdownOpen(false);
+											}}
+											className="w-full border-t border-primary/50 px-4 py-2 text-center font-semibold text-black hover:bg-primary/10 dark:text-white">
+											2026
+										</button>
+									</div>
+								)}
+							</div>
 							<motion.button
 								variants={fadeIn("up", "spring", 0.25, 0.65)}
 								initial="hidden"
