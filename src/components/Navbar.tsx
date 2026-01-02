@@ -31,6 +31,8 @@ export default function Navbar(): React.JSX.Element {
 	const { resolvedTheme } = useTheme();
 	const navBarRef = useRef<HTMLDivElement>(null);
 	const [sheetOpen, setSheetOpen] = React.useState(false);
+	const [teamDropdownOpen, setTeamDropdownOpen] = React.useState(false);
+	const teamRef = useRef<HTMLDivElement>(null);
 	React.useEffect(() => {
 		const handleScroll = (): void => {
 			if (navBarRef.current) {
@@ -50,6 +52,20 @@ export default function Navbar(): React.JSX.Element {
 	React.useEffect(() => {
 		setLogo(resolvedTheme === "dark" ? "/logo_dark.png" : "/logo_light.png");
 	}, [resolvedTheme]);
+
+	React.useEffect(() => {
+		const handleClickOutside = (event: MouseEvent): void => {
+			if (teamRef.current && !teamRef.current.contains(event.target as Node)) {
+				setTeamDropdownOpen(false);
+			}
+		};
+		if (teamDropdownOpen) {
+			document.addEventListener("mousedown", handleClickOutside);
+		}
+		return (): void => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [teamDropdownOpen]);
 	return (
 		<nav
 			ref={navBarRef}
@@ -105,37 +121,49 @@ export default function Navbar(): React.JSX.Element {
 							{navLinks.map((link) => {
 								if (link.label === "Team") {
 									return (
-										<div key={link.label} className="relative">
+										<div key={link.label} className="relative" ref={teamRef}>
 											<button
+												onClick={(): void => setTeamDropdownOpen(!teamDropdownOpen)}
+												onMouseEnter={(): void => setTeamDropdownOpen(true)}
+												onMouseLeave={(): void => setTeamDropdownOpen(false)}
 												className={cn(
 													navigationMenuTriggerStyle(),
-													"text-md peer flex items-center"
+													"text-md flex items-center"
 												)}>
 												Team
-												<ChevronDown className="relative top-[1px] ml-1 h-3 w-3 transition duration-200 peer-hover:rotate-180" />
+												<ChevronDown
+													className={cn(
+														"relative top-[1px] ml-1 h-3 w-3 transition duration-200",
+														teamDropdownOpen && "rotate-180"
+													)}
+												/>
 											</button>
-											<div className="invisible absolute right-0 top-full z-50 mt-1 w-[280px] rounded-md border bg-popover p-4 text-popover-foreground opacity-0 shadow-lg transition-all duration-200 peer-hover:visible peer-hover:opacity-100 hover:visible hover:opacity-100">
-												<div className="grid gap-3">
-													<a
-														href="/team/current"
-														className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
-														<div className="text-sm font-medium leading-none">
-															Current Team
-														</div>
-														<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-															Meet our current team members.
-														</p>
-													</a>
-													<a
-														href="/team/alumni"
-														className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
-														<div className="text-sm font-medium leading-none">Alumni</div>
-														<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-															Meet our alumni from previous batches.
-														</p>
-													</a>
+											{teamDropdownOpen && (
+												<div className="absolute right-0 top-full z-50 mt-1 w-[280px] rounded-md border bg-popover p-4 text-popover-foreground shadow-lg">
+													<div className="grid gap-3">
+														<a
+															href="/team/current"
+															className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+															<div className="text-sm font-medium leading-none">
+																Current Team
+															</div>
+															<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+																Meet our current team members.
+															</p>
+														</a>
+														<a
+															href="/team/alumni"
+															className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+															<div className="text-sm font-medium leading-none">
+																Alumni
+															</div>
+															<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+																Meet our alumni from previous batches.
+															</p>
+														</a>
+													</div>
 												</div>
-											</div>
+											)}
 										</div>
 									);
 								}

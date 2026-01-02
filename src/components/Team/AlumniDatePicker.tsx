@@ -37,7 +37,7 @@ export function AlumniDatePicker({
 				<Button
 					variant={"outline"}
 					className={cn(
-						"xs:wave flex h-12 w-full items-center justify-center rounded-full !border-0 p-0 font-normal !shadow-none !outline-none ring-0 xs:w-12",
+						"xs:wave fixed -left-[153px] bottom-[55px] z-50 flex h-12 w-12 items-center justify-center rounded-full !border-0 p-0 font-normal !shadow-none !outline-none ring-0 md:relative md:bottom-auto md:left-auto md:-mt-24 md:w-full lg:mt-0 lg:w-12",
 						!date && "text-muted-foreground"
 					)}>
 					<ShineBorder
@@ -46,7 +46,7 @@ export function AlumniDatePicker({
 						color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
 						className="m-0 flex h-12 w-full items-center justify-center rounded-full p-0 xs:h-12 xs:w-12">
 						<CalendarIcon className="h-4 w-4" />
-						<p className="ml-2 block xs:hidden">{date ? format(date, "PPP") : <span>Pick a year</span>}</p>
+						<p className="ml-2 hidden">{date ? format(date, "PPP") : <span>Pick a year</span>}</p>
 					</ShineBorder>
 				</Button>
 			</PopoverTrigger>

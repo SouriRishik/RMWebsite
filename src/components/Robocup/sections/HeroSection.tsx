@@ -52,27 +52,25 @@ export default function HeroSection(): React.ReactElement {
 	};
 	return (
 		<div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-background via-background to-background/50">
-			{/* Background Effect */}
 			<div className="absolute inset-0 z-0">
 				<div className="absolute left-10 top-20 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
 				<div className="absolute bottom-40 right-10 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
 			</div>
 
-			<div className="relative z-10 flex min-h-screen items-center justify-center px-4 pt-12 sm:-mt-12 sm:px-6 sm:pt-0 lg:px-8">
-				<div className="grid w-full max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
-					{/* Left Content */}
+			<div className="relative z-10 flex min-h-screen items-center justify-center px-4 pt-6 sm:-mt-12 sm:px-6 sm:pt-0 md:min-h-fit md:items-start md:pb-0 md:pt-20 lg:px-8">
+				<div className="grid w-full max-w-7xl grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-6 lg:grid-cols-2 lg:gap-12">
 					<motion.div
 						variants={textVariant()}
 						initial="hidden"
 						whileInView="show"
 						viewport={{ once: true }}
-						className="mx-auto flex w-full flex-col items-center text-center lg:mx-0 lg:w-auto lg:items-start lg:text-left">
+						className="flex w-full flex-col items-center text-center md:items-start md:text-left lg:mx-0 lg:w-auto lg:items-start lg:text-left">
 						<h1 className="pl-4 text-5xl font-black uppercase leading-tight text-foreground/90 xs:text-6xl sm:pl-0 sm:text-7xl md:text-8xl lg:text-8xl">
 							RoboCup
 							<br />
 							<span className="-ml-3 -mt-2 block text-primary sm:-ml-0 sm:-mt-0">@Work</span>
 						</h1>
-						<p className="mt-6 max-w-xl text-base text-foreground/70 sm:mt-8 sm:text-lg md:text-xl">
+						<p className="mt-6 w-full max-w-xl text-base text-foreground/70 sm:mt-8 sm:text-lg md:text-xl">
 							RoboCup@Work is an international robotics competition designed to advance the capabilities
 							of autonomous robots in industrial and logistical environments. The challenge promotes
 							innovation in robotics technology, encouraging solutions for complex real-world tasks such
@@ -123,14 +121,13 @@ export default function HeroSection(): React.ReactElement {
 								whileInView="show"
 								viewport={{ once: true }}
 								onClick={(): void => setIsVideoOpen(true)}
-								className="inline-flex items-center justify-center gap-2 rounded-lg border border-primary/50 px-8 py-3 font-semibold text-primary transition-all hover:border-primary hover:bg-primary/10">
+								className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-primary/50 px-8 py-3 font-semibold text-primary transition-all hover:border-primary hover:bg-primary/10">
 								<Play className="h-5 w-5" />
 								Watch Videos
 							</motion.button>
 						</div>
 					</motion.div>
 
-					{/* Right - Logo */}
 					<motion.div
 						variants={fadeIn("left", "spring", 0.2, 0.65)}
 						initial="hidden"
@@ -150,7 +147,6 @@ export default function HeroSection(): React.ReactElement {
 				</div>
 			</div>
 
-			{/* Video Modal */}
 			{isVideoOpen && (
 				<div
 					className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
