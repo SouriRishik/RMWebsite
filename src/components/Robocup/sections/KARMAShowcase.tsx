@@ -8,7 +8,7 @@ import { fadeIn, textVariant } from "@/lib/motion";
 
 export default function KARMAShowcase(): React.ReactElement {
 	return (
-		<div className="relative w-full overflow-hidden bg-background px-4 py-20 sm:-mt-20 sm:px-6 md:py-0 md:-mt-[1100px] lg:py-20 lg:-mt-20 lg:px-8">
+		<div className="relative w-full overflow-hidden bg-background px-4 py-20 sm:-mt-20 sm:px-6 md:-mt-[1100px] md:py-0 lg:-mt-20 lg:px-8 lg:py-20">
 			<div className="mx-auto max-w-7xl">
 				<motion.div
 					variants={textVariant()}
