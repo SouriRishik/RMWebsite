@@ -8,7 +8,7 @@ import { fadeIn, textVariant } from "@/lib/motion";
 
 export default function KARMAShowcase(): React.ReactElement {
 	return (
-		<div className="relative w-full overflow-hidden bg-background px-4 py-20 sm:-mt-20 sm:px-6 md:-mt-[1300px] md:py-0 lg:-mt-20 lg:px-8 lg:py-20">
+		<div className="relative w-full overflow-hidden bg-background px-4 py-20 sm:-mt-20 sm:px-6 md:py-0 md:-mt-[1100px] lg:py-20 lg:-mt-20 lg:px-8">
 			<div className="mx-auto max-w-7xl">
 				<motion.div
 					variants={textVariant()}
@@ -24,6 +24,7 @@ export default function KARMAShowcase(): React.ReactElement {
 				</motion.div>
 
 				<div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+					{/* Image - Full width on mobile, half on desktop */}
 					<motion.div
 						variants={fadeIn("right", "spring", 0.2, 0.75)}
 						initial="hidden"
@@ -41,6 +42,7 @@ export default function KARMAShowcase(): React.ReactElement {
 						</div>
 					</motion.div>
 
+					{/* Content */}
 					<motion.div
 						variants={fadeIn("left", "spring", 0.2, 0.75)}
 						initial="hidden"
