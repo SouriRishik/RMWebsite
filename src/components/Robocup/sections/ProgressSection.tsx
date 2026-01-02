@@ -37,7 +37,7 @@ export default function ProgressSection(): React.ReactElement {
 	];
 
 	return (
-		<div className="relative w-full overflow-hidden bg-gradient-to-b from-background/50 via-background to-background px-4 py-20 sm:-mt-12 sm:px-6 lg:px-8">
+		<div className="relative w-full overflow-hidden bg-gradient-to-b from-background/50 via-background to-background px-4 py-20 sm:-mt-12 sm:px-6 md:mt-8 lg:-mt-12 lg:px-8">
 			<div className="mx-auto max-w-7xl">
 				<motion.div
 					variants={textVariant()}
