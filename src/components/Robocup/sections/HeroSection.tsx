@@ -57,14 +57,14 @@ export default function HeroSection(): React.ReactElement {
 				<div className="absolute bottom-40 right-10 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
 			</div>
 
-		<div className="relative z-10 flex min-h-screen items-center justify-center px-4 pt-6 sm:-mt-12 sm:px-6 sm:pt-0 md:min-h-fit md:items-start md:pt-20 md:pb-0 lg:px-8">
-			<div className="grid w-full max-w-7xl grid-cols-1 items-center gap-12 md:gap-6 md:grid-cols-2 lg:gap-12 lg:grid-cols-2">
+			<div className="relative z-10 flex min-h-screen items-center justify-center px-4 pt-6 sm:-mt-12 sm:px-6 sm:pt-0 md:min-h-fit md:items-start md:pb-0 md:pt-20 lg:px-8">
+				<div className="grid w-full max-w-7xl grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-6 lg:grid-cols-2 lg:gap-12">
 					<motion.div
 						variants={textVariant()}
 						initial="hidden"
 						whileInView="show"
 						viewport={{ once: true }}
-					className="flex w-full flex-col items-center text-center md:items-start md:text-left lg:mx-0 lg:w-auto lg:items-start lg:text-left">
+						className="flex w-full flex-col items-center text-center md:items-start md:text-left lg:mx-0 lg:w-auto lg:items-start lg:text-left">
 						<h1 className="pl-4 text-5xl font-black uppercase leading-tight text-foreground/90 xs:text-6xl sm:pl-0 sm:text-7xl md:text-8xl lg:text-8xl">
 							RoboCup
 							<br />
@@ -121,7 +121,7 @@ export default function HeroSection(): React.ReactElement {
 								whileInView="show"
 								viewport={{ once: true }}
 								onClick={(): void => setIsVideoOpen(true)}
-							className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-primary/50 px-8 py-3 font-semibold text-primary transition-all hover:border-primary hover:bg-primary/10">
+								className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-primary/50 px-8 py-3 font-semibold text-primary transition-all hover:border-primary hover:bg-primary/10">
 								<Play className="h-5 w-5" />
 								Watch Videos
 							</motion.button>
