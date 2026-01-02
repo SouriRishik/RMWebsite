@@ -98,19 +98,19 @@ export default function HeroSection(): React.ReactElement {
 									<div className="absolute left-0 right-0 top-full z-10 mt-2 w-[calc(100vw-64px)] rounded-lg border border-primary/50 bg-background sm:left-0 sm:right-auto sm:w-[302px]">
 										<button
 											onClick={(): void => {
-												window.open("/RoboCup-TDP-2025.pdf", "_blank");
-												setIsDropdownOpen(false);
-											}}
-											className="w-full px-4 py-2 text-center font-semibold text-black hover:bg-primary/10 dark:text-white">
-											2025
-										</button>
-										<button
-											onClick={(): void => {
 												window.open("/RoboCup-TDP-2026.pdf", "_blank");
 												setIsDropdownOpen(false);
 											}}
-											className="w-full border-t border-primary/50 px-4 py-2 text-center font-semibold text-black hover:bg-primary/10 dark:text-white">
+											className="w-full px-4 py-2 text-center font-semibold text-black hover:bg-primary/10 dark:text-white">
 											2026
+										</button>
+										<button
+											onClick={(): void => {
+												window.open("/RoboCup-TDP-2025.pdf", "_blank");
+												setIsDropdownOpen(false);
+											}}
+											className="w-full border-t border-primary/50 px-4 py-2 text-center font-semibold text-black hover:bg-primary/10 dark:text-white">
+											2025
 										</button>
 									</div>
 								)}
