@@ -121,11 +121,13 @@ export default function Navbar(): React.JSX.Element {
 							{navLinks.map((link) => {
 								if (link.label === "Team") {
 									return (
-										<div key={link.label} className="relative" ref={teamRef}>
+										<div
+											key={link.label}
+											className="group relative"
+											onMouseEnter={(): void => setTeamDropdownOpen(true)}
+											onMouseLeave={(): void => setTeamDropdownOpen(false)}>
 											<button
 												onClick={(): void => setTeamDropdownOpen(!teamDropdownOpen)}
-												onMouseEnter={(): void => setTeamDropdownOpen(true)}
-												onMouseLeave={(): void => setTeamDropdownOpen(false)}
 												className={cn(
 													navigationMenuTriggerStyle(),
 													"text-md flex items-center"
@@ -139,30 +141,35 @@ export default function Navbar(): React.JSX.Element {
 												/>
 											</button>
 											{teamDropdownOpen && (
-												<div className="absolute right-0 top-full z-50 mt-1 w-[280px] rounded-md border bg-popover p-4 text-popover-foreground shadow-lg">
-													<div className="grid gap-3">
-														<a
-															href="/team/current"
-															className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
-															<div className="text-sm font-medium leading-none">
-																Current Team
-															</div>
-															<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-																Meet our current team members.
-															</p>
-														</a>
-														<a
-															href="/team/alumni"
-															className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
-															<div className="text-sm font-medium leading-none">
-																Alumni
-															</div>
-															<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-																Meet our alumni from previous batches.
-															</p>
-														</a>
+												<>
+													<div className="absolute right-0 top-full h-1.5 w-[280px]" />
+													<div className="absolute right-0 top-full z-50 mt-1.5 w-[280px] rounded-md border bg-popover p-4 text-popover-foreground shadow-lg">
+														<div className="grid gap-3">
+															<a
+																href="/team/current"
+																onClick={(): void => setTeamDropdownOpen(false)}
+																className="block cursor-pointer select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+																<div className="text-sm font-medium leading-none">
+																	Current Team
+																</div>
+																<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+																	Meet our current team members.
+																</p>
+															</a>
+															<a
+																href="/team/alumni"
+																onClick={(): void => setTeamDropdownOpen(false)}
+																className="block cursor-pointer select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
+																<div className="text-sm font-medium leading-none">
+																	Alumni
+																</div>
+																<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+																	Meet our alumni from previous batches.
+																</p>
+															</a>
+														</div>
 													</div>
-												</div>
+												</>
 											)}
 										</div>
 									);
