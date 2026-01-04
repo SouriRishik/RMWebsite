@@ -7,6 +7,8 @@ import useMembers from "@/lib/hooks/useMembers";
 
 import { AlumniDatePicker } from "./AlumniDatePicker";
 
+const CURRENT_ACADEMIC_YEAR_START = 2025;
+
 function AlumniTeamData(): React.ReactElement {
 	const members = useMembers();
 	const [date, setDate] = React.useState<Date | undefined>(undefined);
@@ -15,22 +17,24 @@ function AlumniTeamData(): React.ReactElement {
 	const [minDate, maxDate] = useMemo<[Date | undefined, Date | undefined]>(() => {
 		if (Object.keys(members).length === 0) return [undefined, undefined];
 
-		const currentYear = new Date().getFullYear();
-		const alumniMembers = Object.entries(members).filter(([year]) => parseInt(year) <= currentYear - 1);
+		const alumniMembers = Object.entries(members).filter(([year]) => {
+			const yearNum = parseInt(year);
+			return yearNum < CURRENT_ACADEMIC_YEAR_START;
+		});
 
 		if (alumniMembers.length === 0) return [undefined, undefined];
 
-		const dates = alumniMembers.flatMap(([, yearMembers]) => yearMembers.map((member) => member.year));
-		const minDate = dates.reduce((min, date) => (date < min ? date : min), dates[0]);
-		const maxDate = dates.reduce((max, date) => (date > max ? date : max), dates[0]);
-		return [minDate, maxDate];
+		const startYears = alumniMembers.map(([year]) => parseInt(year));
+		const minYear = Math.min(...startYears);
+		const maxYear = Math.max(...startYears);
+
+		return [new Date(minYear, 0, 1), new Date(maxYear, 0, 1)];
 	}, [members]);
 
 	useEffect(() => {
-		const currentYear = new Date().getFullYear();
 		const collected = Object.keys(members)
 			.map((year) => parseInt(year))
-			.filter((year) => year <= currentYear - 1)
+			.filter((year) => year < CURRENT_ACADEMIC_YEAR_START)
 			.sort((a, b) => b - a);
 		setAlumniYears(collected);
 	}, [members]);
@@ -66,12 +70,14 @@ function AlumniTeamData(): React.ReactElement {
 		if (!date) return;
 		const y = date.getFullYear();
 		const yearMembers = members[String(y)];
-		if (Array.isArray(yearMembers) && y <= new Date().getFullYear() - 1) {
-			setDisplayYear(y);
-			if (typeof window !== "undefined") {
-				window.localStorage.setItem("alumniYear", String(y));
+		if (Array.isArray(yearMembers)) {
+			if (y < CURRENT_ACADEMIC_YEAR_START) {
+				setDisplayYear(y);
+				if (typeof window !== "undefined") {
+					window.localStorage.setItem("alumniYear", String(y));
+				}
+				return;
 			}
-			return;
 		}
 		if (!Array.isArray(alumniYears) || alumniYears.length === 0) return;
 		const sorted = [...alumniYears].sort((a, b) => a - b);

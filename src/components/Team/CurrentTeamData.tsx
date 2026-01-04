@@ -11,8 +11,8 @@ function CurrentTeamData(): React.ReactElement {
 	const [currentTeamMembers, setCurrentTeamMembers] = React.useState<TeamMember[]>([]);
 
 	useEffect(() => {
-		const currentYear = new Date().getFullYear();
-		const yearMembers = members[String(currentYear)];
+		const academicYearStart = 2025;
+		const yearMembers = members[String(academicYearStart)];
 		setCurrentTeamMembers(Array.isArray(yearMembers) ? yearMembers : []);
 	}, [members]);
 
