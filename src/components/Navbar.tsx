@@ -27,7 +27,8 @@ import { buttonVariants } from "./ui/button";
 
 export default function Navbar(): React.JSX.Element {
 	const router = useRouter();
-	const [logo, setLogo] = React.useState("/logo_light.png");
+	const [logo, setLogo] = React.useState("/logo_dark.png");
+	const [mounted, setMounted] = React.useState(false);
 	const { resolvedTheme } = useTheme();
 	const navBarRef = useRef<HTMLDivElement>(null);
 	const [sheetOpen, setSheetOpen] = React.useState(false);
@@ -50,8 +51,14 @@ export default function Navbar(): React.JSX.Element {
 	}, []);
 
 	React.useEffect(() => {
-		setLogo(resolvedTheme === "dark" ? "/logo_dark.png" : "/logo_light.png");
-	}, [resolvedTheme]);
+		setMounted(true);
+	}, []);
+
+	React.useEffect(() => {
+		if (mounted) {
+			setLogo(resolvedTheme === "dark" ? "/logo_dark.png" : "/logo_light.png");
+		}
+	}, [resolvedTheme, mounted]);
 
 	React.useEffect(() => {
 		const handleClickOutside = (event: MouseEvent): void => {
@@ -143,7 +150,7 @@ export default function Navbar(): React.JSX.Element {
 											{teamDropdownOpen && (
 												<>
 													<div className="absolute right-0 top-full h-1.5 w-[280px]" />
-													<div className="absolute right-0 top-full z-50 mt-1.5 w-[280px] rounded-md border bg-popover p-4 text-popover-foreground shadow-lg">
+													<div className="absolute right-0 top-full z-50 mt-1.5 w-[280px] rounded-md border bg-popover p-4 text-popover-foreground shadow-lg duration-200 ease-out animate-in fade-in zoom-in-95">
 														<div className="grid gap-3">
 															<a
 																href="/team/current"

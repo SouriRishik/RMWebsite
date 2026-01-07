@@ -7,9 +7,14 @@ import { RiMoonClearFill, RiSunFill } from "react-icons/ri";
 import { Button } from "./ui/button";
 
 export default function ThemeToggleButton(): React.JSX.Element {
+	const [isDark, setIsDark] = React.useState(true);
 	const { systemTheme, theme, setTheme } = useTheme();
-	const currentTheme = theme === "system" ? systemTheme : theme;
-	const isDark = currentTheme === "dark";
+
+	React.useEffect((): void => {
+		const currentTheme = theme === "system" ? systemTheme : theme;
+		setIsDark(currentTheme === "dark");
+	}, [theme, systemTheme]);
+
 	return (
 		<Button
 			className="flex h-8 w-8 items-center justify-center rounded p-1.5 sm:h-10 sm:w-10 md:p-2"

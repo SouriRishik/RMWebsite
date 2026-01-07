@@ -7,10 +7,9 @@ import React from "react";
 import { RecoilRoot } from "recoil";
 
 export default function AppProvider({ children }: { children: React.ReactNode }): React.JSX.Element {
-	// defaultTheme="dark" forcedTheme="dark" enableSystem={false}
 	return (
 		<RecoilRoot>
-			<ThemeProvider attribute={"class"}>
+			<ThemeProvider attribute={"class"} defaultTheme="dark" enableSystem={false}>
 				{children}
 				<Analytics />
 				<SpeedInsights />
