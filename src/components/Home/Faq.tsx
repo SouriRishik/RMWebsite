@@ -39,7 +39,7 @@ export function FAQ(): React.JSX.Element {
 					</AccordionItem>
 					<AccordionItem value="4" variant={"question"}>
 						<AccordionTrigger variant={"question"}>
-							What are the networking opportunities avalible?
+							What are the networking opportunities available?
 						</AccordionTrigger>
 						<AccordionContent>
 							You will have the opportunity to stay in touch with a diverse group of our alumni who can
