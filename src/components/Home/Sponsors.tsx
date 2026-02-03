@@ -24,6 +24,8 @@ export function Sponsors(): React.JSX.Element {
 	const LIGHT_OVERRIDES: Record<string, string> = {
 		OnlyScrews: "/sponsors/OnlyScrews.png",
 		"Fracktal Works": "/sponsors/FracktalWorks.png",
+		Altium: "/sponsors/Altium.png",
+		Ansys: "/sponsors/Ansys.png",
 	};
 	return (
 		<>
