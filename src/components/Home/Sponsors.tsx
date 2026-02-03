@@ -35,7 +35,7 @@ export function Sponsors(): React.JSX.Element {
 				viewport={{ once: true }}>
 				<p className="text-[14px] uppercase tracking-wider text-foreground/80 sm:text-[18px]">Our Partners</p>
 				<h2 className="text-[30px] font-black text-foreground/90 xs:text-[40px] sm:text-[50px] md:text-[60px]">
-					Sponsors
+					Notable Sponsors
 				</h2>
 			</motion.div>
 			<motion.div
