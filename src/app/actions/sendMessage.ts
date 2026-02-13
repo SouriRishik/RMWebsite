@@ -1,5 +1,6 @@
 "use server";
 
+import nodemailer from "nodemailer";
 import { z } from "zod";
 
 const ContactSchema = z.object({
@@ -55,5 +56,47 @@ export async function sendMessage(data: ContactFormType): Promise<ResponseSchema
 		},
 		body,
 	});
+
+	try {
+		const smtpHost = process.env.SMTP_HOST;
+		const smtpPort = Number(process.env.SMTP_PORT ?? "465");
+		const smtpUser = process.env.SMTP_USER;
+		const smtpPass = process.env.SMTP_PASS;
+		const emailTo = process.env.EMAIL_TO;
+
+		if (smtpHost && smtpUser && smtpPass && emailTo) {
+			const transporter = nodemailer.createTransport({
+				host: smtpHost,
+				port: smtpPort,
+				secure: smtpPort === 465,
+				auth: {
+					user: smtpUser,
+					pass: smtpPass,
+				},
+			});
+
+			await transporter.sendMail({
+				from: `"${firstName} ${lastName}" <${smtpUser}>`,
+				to: emailTo,
+				replyTo: email,
+				subject: `New Contact Form Message from ${firstName} ${lastName}`,
+				text: `Name: ${firstName} ${lastName}\nEmail: ${email}\n\nMessage:\n${message}`,
+				html: `
+					<div style="font-family: Arial, sans-serif;">
+						<img src="${baseUrl}/logo.png" alt="RoboManipal" width="80" height="80" />
+						<h2>New Contact Form Submission</h2>
+						<p><strong>Name:</strong> ${firstName} ${lastName}</p>
+						<p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+						<hr />
+						<p><strong>Message:</strong></p>
+						<p>${message.replace(/\n/g, "<br />")}</p>
+					</div>
+				`,
+			});
+		}
+	} catch (err) {
+		console.error("Failed to send email:", err);
+	}
+
 	return {};
 }
