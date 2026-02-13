@@ -129,7 +129,7 @@ export function Contact(): React.JSX.Element {
 										<Label htmlFor="email">Email</Label>
 										<Input
 											className="mt-1"
-										{...register("email", { onChange: handleInputChange })}
+											{...register("email", { onChange: handleInputChange })}
 											type="email"
 											placeholder="Enter your email"
 										/>
@@ -138,7 +138,7 @@ export function Contact(): React.JSX.Element {
 									<div className="my-2">
 										<Label htmlFor="message">Message</Label>
 										<Textarea
-										{...register("message", { onChange: handleInputChange })}
+											{...register("message", { onChange: handleInputChange })}
 											className="mt-1 min-h-[100px]"
 											placeholder="Enter your message"
 										/>
@@ -148,7 +148,7 @@ export function Contact(): React.JSX.Element {
 										disabled={disabled || sent}
 										type="submit"
 										className={`mt-4 w-full transition-all duration-300 disabled:cursor-not-allowed ${
-											sent ? "bg-green-600 hover:bg-green-600 text-white" : "bg-primary"
+											sent ? "bg-green-600 text-white hover:bg-green-600" : "bg-primary"
 										}`}>
 										{disabled ? (
 											<BeatLoader className="text-primary-foreground" size={5} />
