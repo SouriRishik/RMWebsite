@@ -3,7 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-import { MailIcon, PhoneIcon } from "lucide-react";
+import { CheckCircle, MailIcon, PhoneIcon } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useState } from "react";
@@ -33,10 +33,12 @@ export type ContactFormType = z.infer<typeof ContactSchema>;
 
 export function Contact(): React.JSX.Element {
 	const [disabled, setDisabled] = useState(false);
+	const [sent, setSent] = useState(false);
 	const { resolvedTheme } = useTheme();
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm<ContactFormType>({
 		mode: "onChange",
@@ -52,7 +54,12 @@ export function Contact(): React.JSX.Element {
 				toast.error(`${key}: ${value[0]}`);
 			});
 		}
-		toast.success("Message sent successfully!");
+		setSent(true);
+		reset();
+	};
+
+	const handleInputChange = (): void => {
+		if (sent) setSent(false);
 	};
 
 	return (
@@ -99,7 +106,7 @@ export function Contact(): React.JSX.Element {
 											<Label htmlFor="first-name">First name</Label>
 											<Input
 												className="mt-1"
-												{...register("firstName")}
+												{...register("firstName", { onChange: handleInputChange })}
 												placeholder="Enter your first name"
 											/>
 											<span className="mt-2 text-xs text-red-500">
@@ -110,7 +117,7 @@ export function Contact(): React.JSX.Element {
 											<Label htmlFor="last-name">Last name</Label>
 											<Input
 												className="mt-1"
-												{...register("lastName")}
+												{...register("lastName", { onChange: handleInputChange })}
 												placeholder="Enter your last name"
 											/>
 											<span className="mt-2 text-xs text-red-500">
@@ -122,7 +129,7 @@ export function Contact(): React.JSX.Element {
 										<Label htmlFor="email">Email</Label>
 										<Input
 											className="mt-1"
-											{...register("email")}
+											{...register("email", { onChange: handleInputChange })}
 											type="email"
 											placeholder="Enter your email"
 										/>
@@ -131,18 +138,25 @@ export function Contact(): React.JSX.Element {
 									<div className="my-2">
 										<Label htmlFor="message">Message</Label>
 										<Textarea
-											{...register("message")}
+											{...register("message", { onChange: handleInputChange })}
 											className="mt-1 min-h-[100px]"
 											placeholder="Enter your message"
 										/>
 										<span className="mt-2 text-xs text-red-500">{errors.message?.message}</span>
 									</div>
 									<Button
-										disabled={disabled}
+										disabled={disabled || sent}
 										type="submit"
-										className="mt-4 w-full bg-primary disabled:cursor-not-allowed">
+										className={`mt-4 w-full transition-all duration-300 disabled:cursor-not-allowed ${
+											sent ? "bg-green-600 text-white hover:bg-green-600" : "bg-primary"
+										}`}>
 										{disabled ? (
 											<BeatLoader className="text-primary-foreground" size={5} />
+										) : sent ? (
+											<span className="flex items-center justify-center gap-2">
+												<CheckCircle className="h-5 w-5" />
+												Message Sent!
+											</span>
 										) : (
 											"Send Message"
 										)}
