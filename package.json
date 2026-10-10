@@ -42,7 +42,7 @@
 		"eslint-plugin-simple-import-sort": "^10.0.0",
 		"mocha": "^10.8.2",
 		"nyc": "^15.1.0",
-		"postcss": "^8.4.24",
+		"postcss": "^8.5.10",
 		"postcss-import": "^16.0.0",
 		"postcss-nesting": "^12.0.2",
 		"pre-commit": "^1.2.2",
